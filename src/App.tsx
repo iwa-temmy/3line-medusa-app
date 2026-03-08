@@ -1,8 +1,14 @@
- function App() {
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Settings from "./pages/settings";
+
+function App() {
   return (
-    <div className="flex items-center h-screen justify-center w-screen min-h-screen text-3xl">
-      <h1>Welcome to 3line React App</h1>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/settings" element={<Settings />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 export default App;

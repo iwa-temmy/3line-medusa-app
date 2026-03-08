@@ -9,11 +9,20 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        primary: {
+          300: "#D6BBFB",
+          600: "#7F56D9",
+          700: "#6941C6",
+        },
       },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+      fontSize: {
+        xs: "11px",
+        sm: "13px",
+        base: "15px",
+        lg: "16px",
+        xl: "18px",
+        "2xl": "22px",
+        "3xl": "26px",
       },
     },
   },
