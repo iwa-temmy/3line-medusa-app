@@ -14,6 +14,7 @@ import React from "react";
 import { roles } from "../../data";
 import { ReactComponent as Users } from "@/icons/menu/users.svg";
 import { Button } from "@/components/ui/button";
+import RolesDataTable from "./roles-datatable";
 
 const Role = () => {
   return (
@@ -23,7 +24,7 @@ const Role = () => {
       <ConnectedEmail />
       <Separator />
       <ActiveRole />
-      <Separator />
+      <RolesDataTable />
     </section>
   );
 };
