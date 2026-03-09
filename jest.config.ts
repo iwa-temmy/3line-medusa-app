@@ -19,6 +19,9 @@ module.exports = {
     // Handle image imports
     '^.+\\.(png|jpg|jpeg|gif|webp|avif|ico|bmp|svg)$': `<rootDir>/__mocks__/fileMock.js`,
 
+    // Mock Vite-specific env imports
+    '^@/lib/constant$': '<rootDir>/__mocks__/constantMock.js',
+
     // Handle module aliases
     '^@/(.*)$': '<rootDir>/src/$1',
   },

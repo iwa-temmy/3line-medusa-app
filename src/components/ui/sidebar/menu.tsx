@@ -19,7 +19,7 @@ export function Menu() {
           {menuList.map(
             ({ href, key, label, icon: Icon, isDivider, active }) => {
               return isDivider ? (
-                <li className="border-x border-x-gray-100 text-base w-full px-3">
+                <li key={key} className="border-x border-x-gray-100 text-base w-full px-3">
                   {label}
                 </li>
               ) : (

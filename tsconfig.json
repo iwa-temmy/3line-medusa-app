@@ -28,6 +28,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true,
+    "types": ["jest", "node"],
     "paths": {
       "@/*": [
         "./src/*"
@@ -35,7 +36,8 @@
     }
   },
   "include": [
-    "src"
+    "src",
+    "__tests__"
   ],
   "exclude": [
     "node_modules"

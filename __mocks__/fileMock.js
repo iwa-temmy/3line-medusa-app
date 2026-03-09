@@ -1,1 +1,5 @@
-module.exports = 'test-file-stub';
+const React = require('react');
+module.exports = {
+  ReactComponent: ({ ...props }) => React.createElement('svg', props),
+  default: 'test-file-stub',
+};
