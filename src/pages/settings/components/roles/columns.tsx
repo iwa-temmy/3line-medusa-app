@@ -67,7 +67,9 @@ export const columns: ColumnDef<RoleItem>[] = [
   },
   {
     accessorKey: "dateCreated",
-    header: () => <span className="text-gray-500 text-xs text-nowrap">Date created</span>,
+    header: () => (
+      <span className="text-gray-500 text-xs text-nowrap">Date created</span>
+    ),
     cell: ({ row }) => (
       <span className="text-gray-500 text-sm">
         {row.getValue("dateCreated")}
@@ -108,9 +110,11 @@ export const columns: ColumnDef<RoleItem>[] = [
             </Avatar>
           ))}
           {roleUsers.extraCount && (
-            <span className="ml-1 text-xs text-gray-500 font-medium">
-              {roleUsers.extraCount}
-            </span>
+            <Avatar className="h-8 w-8 border-2 bg-gray-50 border-white -ml-2 first:ml-0">
+              <AvatarFallback className="text-xs text-gray-500 font-medium">
+                {roleUsers.extraCount}
+              </AvatarFallback>
+            </Avatar>
           )}
         </div>
       );
