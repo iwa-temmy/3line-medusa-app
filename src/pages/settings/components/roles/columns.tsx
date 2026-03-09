@@ -5,16 +5,24 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Check, ArrowDown } from "lucide-react";
 import { ReactComponent as Download } from "@/icons/download.svg";
 
-export type RoleItem = {
-  id: string;
+type RoleUser = {
+  id: number;
   name: string;
-  type: string;
-  date_created: string;
-  status: "active" | "inactive";
-  role_users: string[];
+  avatar: string;
 };
 
-const MAX_VISIBLE_AVATARS = 4;
+export type RoleItem = {
+  id: number;
+  name: string;
+  type: string;
+  dateCreated: string;
+  status: "Active" | "Inactive";
+  roleUsers: {
+    visible: RoleUser[];
+    totalCount: number;
+    extraCount: string;
+  };
+};
 
 export const columns: ColumnDef<RoleItem>[] = [
   {
@@ -58,11 +66,11 @@ export const columns: ColumnDef<RoleItem>[] = [
     ),
   },
   {
-    accessorKey: "date_created",
+    accessorKey: "dateCreated",
     header: () => <span className="text-gray-500 text-xs">Date created</span>,
     cell: ({ row }) => (
       <span className="text-gray-500 text-sm">
-        {row.getValue("date_created")}
+        {row.getValue("dateCreated")}
       </span>
     ),
   },
@@ -71,36 +79,37 @@ export const columns: ColumnDef<RoleItem>[] = [
     header: () => <span className="text-gray-500 text-xs">Status</span>,
     cell: ({ row }) => {
       const status = row.getValue<RoleItem["status"]>("status");
+      const isActive = status === "Active";
       return (
-        <Badge variant={status}>
-          {status === "active" && <Check className="h-3 w-3" />}
-          {status === "active" ? "Active" : "In Active"}
+        <Badge variant={isActive ? "active" : "inactive"}>
+          {isActive && <Check className="h-3 w-3" />}
+          {isActive ? "Active" : "In Active"}
         </Badge>
       );
     },
   },
   {
-    accessorKey: "role_users",
+    accessorKey: "roleUsers",
     header: () => <span className="text-gray-500 text-xs">Role users</span>,
     cell: ({ row }) => {
-      const users: string[] = row.getValue("role_users");
-      const visible = users.slice(0, MAX_VISIBLE_AVATARS);
-      const overflow = users.length - MAX_VISIBLE_AVATARS;
+      const roleUsers = row.getValue<RoleItem["roleUsers"]>("roleUsers");
 
       return (
         <div className="flex items-center">
-          {visible.map((src, i) => (
+          {roleUsers.visible.map((user) => (
             <Avatar
-              key={i}
+              key={user.id}
               className="h-8 w-8 border-2 border-white -ml-2 first:ml-0"
             >
-              <AvatarImage src={src} />
-              <AvatarFallback className="text-xs">U</AvatarFallback>
+              <AvatarImage src={user.avatar} alt={user.name} />
+              <AvatarFallback className="text-xs">
+                {user.name.charAt(0)}
+              </AvatarFallback>
             </Avatar>
           ))}
-          {overflow > 0 && (
+          {roleUsers.extraCount && (
             <span className="ml-1 text-xs text-gray-500 font-medium">
-              +{overflow}
+              {roleUsers.extraCount}
             </span>
           )}
         </div>

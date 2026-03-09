@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
 import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,
-} from "@tanstack/react-table"
+} from "@tanstack/react-table";
 
 import {
   Table,
@@ -14,23 +14,28 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
+} from "@/components/ui/table";
+import { Skeleton } from "./skeleton";
 
 interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+  columns: ColumnDef<TData, TValue>[];
+  data: TData[];
+  loading?: boolean;
+  loaderRowCount?: number;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  loading,
+  loaderRowCount = 6,
 }: DataTableProps<TData, TValue>) {
   // eslint-disable-next-line react-hooks/incompatible-library
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-  })
+  });
 
   return (
     <div className="overflow-hidden rounded-md border">
@@ -45,16 +50,21 @@ export function DataTable<TData, TValue>({
                       ? null
                       : flexRender(
                           header.column.columnDef.header,
-                          header.getContext()
+                          header.getContext(),
                         )}
                   </TableHead>
-                )
+                );
               })}
             </TableRow>
           ))}
         </TableHeader>
         <TableBody>
-          {table.getRowModel().rows?.length ? (
+          {loading ? (
+            <TableSkeletonLoader
+              rows={loaderRowCount}
+              tableHeader={table?.getHeaderGroups()?.[0]?.headers}
+            />
+          ) : table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
               <TableRow
                 className="bg-white"
@@ -78,5 +88,32 @@ export function DataTable<TData, TValue>({
         </TableBody>
       </Table>
     </div>
-  )
+  );
 }
+
+const TableSkeletonLoader = ({
+  rows,
+  tableHeader,
+}: {
+  rows: number;
+  tableHeader: any;
+}) => {
+  return (
+    <>
+      {Array(rows)
+        .fill(null)
+        .map((_, index) => (
+          <TableRow
+            key={index}
+            className="border-none hover:bg-transparent dark:hover:bg-transparent"
+          >
+            {tableHeader?.map((header: any) => (
+              <TableCell key={header.id} className="text-center py-4">
+                <Skeleton className="h-5 rounded-full w-full" />
+              </TableCell>
+            ))}
+          </TableRow>
+        ))}
+    </>
+  );
+};
