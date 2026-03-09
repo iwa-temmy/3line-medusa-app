@@ -46,7 +46,7 @@ const ConnectedEmail = () => {
     React.useState<string>("alternative-email");
 
   return (
-    <section className="grid md:grid-cols-7">
+    <section className="grid gap-5 md:gap-0 md:grid-cols-7">
       <div className="md:col-span-1 text-sm">
         <h2 className="text-gray-700 font-medium">Connected email</h2>
         <p className="text-gray-500">Select role account</p>
@@ -97,7 +97,7 @@ const ConnectedEmail = () => {
 const ActiveRole = () => {
   const [activeRole, setActiveRole] = React.useState<string>("Superadmin");
   return (
-    <section className="grid grid-cols-1 md:grid-cols-8">
+    <section className="grid gap-5 md:gap-0 grid-cols-1 md:grid-cols-8">
       <div className="md:col-span-2 text-sm">
         <h2 className="text-gray-700 font-medium">Active Role</h2>
         <p className="text-gray-500">
