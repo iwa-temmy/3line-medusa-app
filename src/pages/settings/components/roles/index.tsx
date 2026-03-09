@@ -15,6 +15,7 @@ import { roles } from "../../data";
 import { ReactComponent as Users } from "@/icons/menu/users.svg";
 import { Button } from "@/components/ui/button";
 import RolesDataTable from "./roles-datatable";
+import { cn } from "@/lib/utils";
 
 const Role = () => {
   return (
@@ -42,7 +43,7 @@ const RolesHeader = () => {
 
 const ConnectedEmail = () => {
   const [selectedEmail, setSelectedEmail] =
-    React.useState<string>("my-account-email");
+    React.useState<string>("alternative-email");
 
   return (
     <section className="grid md:grid-cols-7">
@@ -77,12 +78,12 @@ const ConnectedEmail = () => {
           </div>
         </RadioGroup>
         {selectedEmail === "alternative-email" ? (
-          <div className="pt-3 pl-6">
+          <div className="pt-3 pl-6 w-full md:w-5/12">
             <Input
               type="email"
               startAdornment={<Mail className="size-5 stroke-gray-500" />}
               size="md"
-              className="border-gray-300 w-3/5"
+              className="border-gray-300 bg-white w-full"
               defaultValue="billing@untitledui.com"
               placeholder="enter email"
             />
@@ -110,28 +111,57 @@ const ActiveRole = () => {
           onValueChange={setActiveRole}
           className="space-y-2.5"
         >
-          {roles.map((role) => (
-            <FieldLabel key={role.id} htmlFor={role.name}>
-              <Field orientation="horizontal">
-                <FieldContent className="flex-row gap-3">
-                  <span className="border border-gray-100 w-fit h-fit px-3 py-1 rounded-md">
-                    <Users className="size-6 stroke-gray-500" />
-                  </span>
-                  <div>
-                    <FieldTitle>{role.name}</FieldTitle>
-                    <FieldDescription>
-                      Last active: {role.last_active}
-                    </FieldDescription>
-                    <div className="space-x-4 pt-2.5">
-                      <button>Set as default</button>
-                      <button className="text-primary-700">Edit</button>
+          {roles.map((role) => {
+            const isActive = activeRole === role.name;
+            return (
+              <FieldLabel
+                className={cn(
+                  "cursor-pointer",
+                  isActive && "border-primary-300 bg-primary-50",
+                )}
+                key={role.id}
+                htmlFor={role.name}
+              >
+                <Field orientation="horizontal">
+                  <FieldContent className="flex-row gap-3">
+                    <span className="border border-gray-100 w-fit h-fit px-3 py-1 rounded-md">
+                      <Users className="size-6 stroke-gray-500" />
+                    </span>
+                    <div>
+                      <FieldTitle
+                        className={cn(isActive && "text-primary-800")}
+                      >
+                        {role.name}
+                      </FieldTitle>
+                      <FieldDescription
+                        className={cn(
+                          "text-sm font-normal",
+                          isActive ? "text-primary-600" : "text-gray-500",
+                        )}
+                      >
+                        Last active: {role.last_active}
+                      </FieldDescription>
+                      <div className="space-x-4 pt-2.5 text-sm">
+                        <button
+                          className={cn(
+                            isActive ? "text-primary-500" : "text-gray-500",
+                          )}
+                        >
+                          Set as default
+                        </button>
+                        <button className="text-primary-700">Edit</button>
+                      </div>
                     </div>
-                  </div>
-                </FieldContent>
-                <RadioGroupItem value={role.name} id={role.name} />
-              </Field>
-            </FieldLabel>
-          ))}
+                  </FieldContent>
+                  <RadioGroupItem
+                    value={role.name}
+                    id={role.name}
+                    variant="check"
+                  />
+                </Field>
+              </FieldLabel>
+            );
+          })}
         </RadioGroup>
         <Button
           className="px-0 no-underline [&_svg]:stroke-gray-500 font-medium text-gray-500"

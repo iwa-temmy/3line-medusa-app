@@ -1,6 +1,6 @@
 import * as React from "react"
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group"
-import { Circle } from "lucide-react"
+import { Check, Circle } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
@@ -20,19 +20,26 @@ RadioGroup.displayName = RadioGroupPrimitive.Root.displayName
 
 const RadioGroupItem = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>
->(({ className, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item> & {
+    variant?: "circle" | "check"
+  }
+>(({ className, variant = "circle", ...props }, ref) => {
   return (
     <RadioGroupPrimitive.Item
       ref={ref}
       className={cn(
-        "aspect-square h-4 w-4 rounded-full border border-gray-300 data-[state=checked]:border-primary-600 text-oklch(0.205 0 0) shadow focus:outline-none focus-visible:ring-1 focus-visible:ring-oklch(0.708 0 0) disabled:cursor-not-allowed disabled:opacity-50 dark:border-oklch(1 0 0 / 10%) dark:text-oklch(0.87 0.00 0) dark:focus-visible:ring-oklch(0.556 0 0)",
+        "aspect-square h-4 w-4 rounded-full border border-gray-300 text-oklch(0.205 0 0) shadow focus:outline-none focus-visible:ring-1 focus-visible:ring-oklch(0.708 0 0) disabled:cursor-not-allowed disabled:opacity-50 dark:border-oklch(1 0 0 / 10%) dark:text-oklch(0.87 0.00 0) dark:focus-visible:ring-oklch(0.556 0 0)",
+        variant === "circle" ? "data-[state=checked]:border-primary-600" : "data-[state=checked]:bg-primary-600 data-[state=checked]:border-none",
         className
       )}
       {...props}
     >
       <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
-        <Circle className="h-2 w-2 stroke-primary-600 fill-primary-600" />
+        {variant === "check" ? (
+          <Check className="h-3 w-3 stroke-white stroke-4" />
+        ) : (
+          <Circle className="h-2 w-2 stroke-primary-600 fill-primary-600" />
+        )}
       </RadioGroupPrimitive.Indicator>
     </RadioGroupPrimitive.Item>
   )

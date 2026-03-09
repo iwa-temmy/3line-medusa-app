@@ -10,9 +10,12 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
         primary: {
+          50: "#F9F5FF",
           300: "#D6BBFB",
+          500: "#9E77ED",
           600: "#7F56D9",
           700: "#6941C6",
+          800: "#53389E",
         },
       },
       fontSize: {

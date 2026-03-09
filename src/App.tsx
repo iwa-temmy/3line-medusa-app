@@ -1,11 +1,11 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Settings from "./pages/settings";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />} />
+        <Route path="/" element={<Navigate to="/settings" replace />} />
         <Route path="/settings" element={<Settings />} />
       </Routes>
     </BrowserRouter>
