@@ -67,7 +67,7 @@ export const columns: ColumnDef<RoleItem>[] = [
   },
   {
     accessorKey: "dateCreated",
-    header: () => <span className="text-gray-500 text-xs">Date created</span>,
+    header: () => <span className="text-gray-500 text-xs text-nowrap">Date created</span>,
     cell: ({ row }) => (
       <span className="text-gray-500 text-sm">
         {row.getValue("dateCreated")}

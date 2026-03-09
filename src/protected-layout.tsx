@@ -10,6 +10,18 @@ const ProtectedLayout = ({
   children: React.ReactNode;
 }) => {
   const [sidebarOpen, setSidebarOpen] = React.useState<boolean>(true);
+
+  React.useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 768px)");
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      if (e.matches) setSidebarOpen(true);
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
   return (
     <div>
       <MobileNavigation
