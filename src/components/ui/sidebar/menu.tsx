@@ -7,9 +7,19 @@ import { Avatar, AvatarFallback, AvatarImage } from "../avatar";
 import { LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-export function Menu() {
+export function Menu({
+  setSidebarOpen,
+}: {
+  setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const pathname = useLocation();
   const menuList = getMenuList(pathname?.pathname);
+
+  function handleMobileClose() {
+    if (window.innerWidth < 768) {
+      setSidebarOpen(false);
+    }
+  }
 
   return (
     <ScrollArea className="[&>div>div[style]]:!block">
@@ -19,7 +29,10 @@ export function Menu() {
           {menuList.map(
             ({ href, key, label, icon: Icon, isDivider, active }) => {
               return isDivider ? (
-                <li key={key} className="border-x border-x-gray-100 text-base w-full px-3">
+                <li
+                  key={key}
+                  className="border-x border-x-gray-100 text-base w-full px-3"
+                >
                   {label}
                 </li>
               ) : (
@@ -29,6 +42,7 @@ export function Menu() {
                       "flex items-center gap-3 py-2.5",
                       active && "bg-gray-50",
                     )}
+                    onClick={handleMobileClose}
                     to={href as string}
                   >
                     <Icon className="size-5 stroke-gray-500" />
@@ -57,7 +71,9 @@ export function Menu() {
               className="w-full rounded-lg h-36 object-cover"
             />
             <div className="space-x-4">
-              <button className="text-gray-500 font-medium text-sm">Dismiss</button>
+              <button className="text-gray-500 font-medium text-sm">
+                Dismiss
+              </button>
               <button className="text-primary-700 font-medium text-sm">
                 What&apos;s new?
               </button>

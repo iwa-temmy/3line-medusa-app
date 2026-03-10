@@ -10,7 +10,7 @@ const MobileNavigation = ({
   setSideBarOpen: (open: boolean) => void;
 }) => {
   return (
-    <nav className="w-full flex justify-between items-center py-2 px-4 sticky border-b border-b-gray-100 md:hidden">
+    <nav className="w-full bg-white flex justify-between items-center py-2 px-4 fixed border-b border-b-gray-100 md:hidden">
       <span className="flex items-center gap-2">
         <img src="/assets/logo.svg" alt="Logo" className="h-8" />
       </span>

@@ -23,14 +23,14 @@ const ProtectedLayout = ({
   }, []);
 
   return (
-    <div>
+    <div className="overflow-hidden">
       <MobileNavigation
         sidebarOpen={sidebarOpen}
         setSideBarOpen={setSidebarOpen}
       />
-      <Sidebar sidebarOpen={sidebarOpen} />
+      <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <main
-        className={`bg-gray-50 lg:ml-80 h-screen overflow-y-auto px-6 ${className}`}
+        className={`bg-gray-50 pt-12 md:pt-0 lg:ml-80 h-screen overflow-y-auto px-6 ${className}`}
       >
         {children}
       </main>
