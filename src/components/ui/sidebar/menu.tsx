@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { getMenuList } from "@/lib/menu-list";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -12,19 +13,20 @@ export function Menu({
 }: {
   setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const pathname = useLocation();
-  const menuList = getMenuList(pathname?.pathname);
+  const { pathname } = useLocation();
+  const menuList = getMenuList(pathname);
 
-  function handleMobileClose() {
-    if (window.innerWidth < 768) {
+  useEffect(() => {
+    if (window.matchMedia("(max-width: 767px)").matches) {
       setSidebarOpen(false);
     }
-  }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
 
   return (
     <ScrollArea className="[&>div>div[style]]:!block">
       <div className="border-t border-t-gray-100 border-x border-x-gray-100 h-4 mt-4 rounded-t-md" />
-      <nav className="h-full w-full space-y-5">
+      <nav className="h-full w-full space-y-5 pb-8 md:pb-0">
         <ul className="flex flex-col items-start space-y-1 px-1">
           {menuList.map(
             ({ href, key, label, icon: Icon, isDivider, active }) => {
@@ -42,7 +44,6 @@ export function Menu({
                       "flex items-center gap-3 py-2.5",
                       active && "bg-gray-50",
                     )}
-                    onClick={handleMobileClose}
                     to={href as string}
                   >
                     <Icon className="size-5 stroke-gray-500" />

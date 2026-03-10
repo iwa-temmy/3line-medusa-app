@@ -16,7 +16,7 @@ export function Sidebar({
   return (
     <aside
       className={cn(
-        "fixed top-13 md:top-0 left-0 z-20 h-screen bg-white w-[18rem]  md:translate-x-0 transition-[width] ease-in-out duration-300 border-r border-r-gray-100 md:w-80",
+        "fixed top-[5.6%] md:top-0 left-0 z-20 h-screen bg-white w-[18.5rem]  md:translate-x-0 transition-[width] ease-in-out duration-300 border-r border-r-gray-100 md:w-80",
         !sidebarOpen
           ? " -translate-x-96 opacity-0"
           : "translate-x-0 opacity-100",
