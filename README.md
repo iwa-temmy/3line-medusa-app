@@ -62,44 +62,54 @@
     ├── __tests__
     |   ├── components                  # Contains tests for components.
     |   ├── layouts                     # Contains tests for layouts.
-    |   ├── pages                       # Contains tests for pages.
-    |   |   ├── homepage.test.js        # Contains test instructions to test the homepage.
     ├── .husky
     |   ├── commit-msg                  # Contains to check the commit message if it follows the global standard of commit message
     |   ├── post-commit                 # Contains instruction to run when a commit is triggered after actually committing
     |   ├── pre-commit                  # Contains instruction to run when a commit is triggered before actually committing
     |   ├── pre-push                    # Contains instruction to run when a commit is triggered before pushing the committed changes
-    ├── public                          # Project assets - like svgs, images, fonts, and static files
-    │   ├── fonts                       # Font files
-    │   ├── assets                      # Other assets like lotties
+    ├── coverage                        # Test coverage reports (auto-generated)
+    ├── public                          # Project assets - like svgs, images, and static files
+    │   ├── assets                      # Other assets like lotties, images
+    │   ├── icon.ico                    # App favicon
     ├── src                             # All project source files
     │   ├── components                  # Reusable components
     │   │   ├── ui                      # UI components (Button, etc.)
+    │   ├── icons                       # Icon components
     │   ├── lib                         # Utility constants, function, validations etc.
     │   │   ├── utils.ts                # Utility functions and other important functions.
+    │   │   ├── constant.ts             # App constants
+    │   │   ├── menu-list.ts            # Menu configuration
     │   │   ├── types                   # Types and Interfaces for variables, constants, payload etc.
     │   │   ├── schema                  # Validation Schema for forms
+    │   ├── pages                       # Application pages
+    │   │   ├── coming-soon             # Coming soon page
+    │   │   ├── not-found               # 404 page
+    │   │   ├── settings                # Settings page
     │   ├── App.tsx                     # Main app component
     │   ├── main.tsx                    # Application entry point
+    │   ├── protected-layout.tsx        # Protected route layout wrapper
     │   ├── index.css                   # Global CSS with Tailwind imports
     │   ├── vite-env.d.ts               # Vite environment types
-    ├── index.html                      # HTML entry point
-    ├── postcss.config.mjs              # contains instructions for postcss configuration
-    ├── tailwind.config.ts              # contains instructions for tailwindcss configuration.
-    ├── vite.config.ts                  # contains Vite build configuration
-    ├── jest.config.ts                  # contains instructions for jest configuration for tests
-    ├── jest.setup.js                   # Jest setup file
-    ├── babel.config.js                 # contains instructions for babel configuration
-    ├── commitlint.config.js            # contains instructions for commit linting and adherence to commit message standards
-    ├── .lintstagedrc.js                # contains instructions for linting
-    ├── .prettierrc.ts                  # contains instructions for prettier linting
-    ├── branch-name-lint.json           # contains instructions for branch checks.
+    ├── .env                            # Environment variables
+    ├── .eslintrc.json                  # ESLint configuration
+    ├── .gitignore                      # Git ignore rules
+    ├── .lintstagedrc.js                # Lint-staged configuration
+    ├── .prettierrc.ts                  # Prettier configuration
+    ├── babel.config.js                 # Babel configuration
+    ├── branch-name-lint.json           # Branch name linting rules
+    ├── commitlint.config.js            # Commit message linting configuration
     ├── components.json                 # ShadCN configuration
-    ├── package.json                    # contains project information, package and dependencies installed, instructions.
-    ├── README.md
-    ├── tsconfig.json                   # contains instructions typescript configuration
+    ├── index.html                      # HTML entry point
+    ├── jest.config.ts                  # Jest testing configuration
+    ├── jest.setup.js                   # Jest setup file
+    ├── package.json                    # Project dependencies and scripts
+    ├── postcss.config.mjs              # PostCSS configuration
+    ├── README.md                       # Project documentation
+    ├── tailwind.config.ts              # Tailwind CSS configuration
+    ├── tsconfig.json                   # TypeScript configuration for app
     ├── tsconfig.node.json              # TypeScript configuration for Node (Vite config)
-    └── ...
+    ├── vercel.json                     # Vercel deployment configuration
+    └── vite.config.ts                  # Vite build configuration
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -125,7 +135,7 @@ To get a local copy up and running follow these simple example steps.
    ```
 2. cd into the project
    ```sh
-   cd react-raw-template
+   cd 3line-medusa-app
    ```
 3. Install packages
    ```sh
